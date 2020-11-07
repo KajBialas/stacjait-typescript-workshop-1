@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import CounterButton from './Button';
 
 type Counter1State = {
     counter: number;
@@ -8,7 +9,7 @@ type Counter1Props = {
     title: string;
 }
 
-enum Button {
+export enum ButtonType {
     INCREMENT = '+',
     DECREMENT = '-',
     RESET = 'RESET',
@@ -31,9 +32,9 @@ class Counter1 extends Component<Counter1Props, Counter1State> {
                 </header>
                 <div>
                     Counter: {this.state.counter}
-                    <button onClick={this.handleIncrement}>{Button.INCREMENT}</button>
-                    <button onClick={this.handleDecrement}>{Button.DECREMENT}</button>
-                    <button onClick={this.handleReset}>{Button.RESET}</button>
+                    <CounterButton text={ButtonType.INCREMENT} handleClick={this.handleIncrement} />
+                    <CounterButton text={ButtonType.DECREMENT} handleClick={this.handleDecrement} />
+                    <CounterButton text={ButtonType.RESET} handleClick={this.handleReset} />
                 </div>
             </div>
         )
