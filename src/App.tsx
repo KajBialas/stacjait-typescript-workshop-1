@@ -1,18 +1,20 @@
 import React from 'react';
+import Header from './components/Header';
+
+const TEXTS = {
+    HEADER: {
+        TITLE: 'Application Header',
+        SUBTITLE: 'Application Subheader',
+    }
+};
 
 function App() {
-    const add = (...rest: number[]) => {
-        let result:number = 0;
-        rest.map((element) => {
-            result += element;
-        })
-        return result;
-    };
 
-    add(5,6,7);
   return (
     <div>
-        {add(5,6,7)}
+        <Header
+            subtitle={TEXTS.HEADER.SUBTITLE}
+        />
     </div>
   );
 }
