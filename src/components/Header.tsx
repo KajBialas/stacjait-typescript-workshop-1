@@ -1,7 +1,12 @@
 import React from 'react';
 
+type HeaderProps = {
+    title?: string;
+    subtitle?: string;
+}
+
 function Header(
-        { title, subtitle }: {title?: string; subtitle?: string}
+        { title, subtitle }: HeaderProps
     ) {
     return (
         <header>
