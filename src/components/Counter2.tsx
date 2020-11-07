@@ -14,10 +14,12 @@ enum CounterActionType {
     INCREMENT = 'INCREMENT',
     DECREMENT = 'DECREMENT',
     RESET = 'RESET',
+    SET = 'SET_VALUE',
 }
 
 type CounterAction = {
     type: CounterActionType;
+    payload?: number;
 }
 
 const initialState: InitialState = {
@@ -32,6 +34,8 @@ function counterReducer(state: InitialState, action: CounterAction):InitialState
             return {counter: state.counter - 1};
         case CounterActionType.RESET:
             return {counter: 0};
+        case CounterActionType.SET:
+            return {counter: action.payload ? action.payload : state.counter}
         default:
             return state;
     }
@@ -41,8 +45,15 @@ const Counter2: React.FC<Counter2Props> = ({title}) => {
     const [state, dispatch] = useReducer(counterReducer, initialState);
     const [formValue, setFormValue] = useState(state.counter);
 
-    // React.FormEvent
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        dispatch({
+            type: CounterActionType.SET,
+            payload: formValue,
+        });
+    }
 
+    // click React.MouseEvent
 
     const handleChange = (e: React.ChangeEvent) => {
         setFormValue(Number((e.target as HTMLInputElement).value));
@@ -56,7 +67,7 @@ const Counter2: React.FC<Counter2Props> = ({title}) => {
                     text={ButtonType.INCREMENT}
                     handleClick={() => dispatch({type: CounterActionType.INCREMENT})}
                 />
-                <form>
+                <form onSubmit={handleSubmit}>
                     <label>Podaj wartość:</label>
                     <input type='text' value={formValue} onChange={handleChange} />
                 </form>
