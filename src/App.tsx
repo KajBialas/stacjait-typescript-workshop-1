@@ -1,6 +1,8 @@
 import React from 'react';
 import Header from './components/Header';
 import Counter1 from "./components/Counter1";
+import Counter2 from "./components/Counter2";
+import PostList from "./components/PostList";
 
 const TEXTS = {
     HEADER: {
@@ -19,7 +21,9 @@ function App() {
         <Header
             subtitle={TEXTS.HEADER.SUBTITLE}
         />
+        <PostList />
         <Counter1 title={TEXTS.COUNTER1.TITLE}/>
+        <Counter2 title={TEXTS.COUNTER1.TITLE}/>
     </div>
   );
 }
