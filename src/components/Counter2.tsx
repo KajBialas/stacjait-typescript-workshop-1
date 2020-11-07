@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useState } from 'react';
 import {ButtonType} from "./Counter1";
 import Button from "./Button";
 
@@ -39,7 +39,14 @@ function counterReducer(state: InitialState, action: CounterAction):InitialState
 
 const Counter2: React.FC<Counter2Props> = ({title}) => {
     const [state, dispatch] = useReducer(counterReducer, initialState);
+    const [formValue, setFormValue] = useState(state.counter);
 
+    // React.FormEvent
+
+
+    const handleChange = (e: React.ChangeEvent) => {
+        setFormValue(Number((e.target as HTMLInputElement).value));
+    }
     return (
         <div>
             <h2>{title}</h2>
@@ -49,6 +56,10 @@ const Counter2: React.FC<Counter2Props> = ({title}) => {
                     text={ButtonType.INCREMENT}
                     handleClick={() => dispatch({type: CounterActionType.INCREMENT})}
                 />
+                <form>
+                    <label>Podaj wartość:</label>
+                    <input type='text' value={formValue} onChange={handleChange} />
+                </form>
             </div>
         </div>
     )
