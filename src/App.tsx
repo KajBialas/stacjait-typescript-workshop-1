@@ -1,12 +1,18 @@
 import React from 'react';
 
 function App() {
-    const add = (a:number, b?:number) => b ? a+b : a;
+    const add = (...rest: number[]) => {
+        let result:number = 0;
+        rest.map((element) => {
+            result += element;
+        })
+        return result;
+    };
 
+    add(5,6,7);
   return (
     <div>
-        {add(5,5)}
-        {add(5,)}
+        {add(5,6,7)}
     </div>
   );
 }
